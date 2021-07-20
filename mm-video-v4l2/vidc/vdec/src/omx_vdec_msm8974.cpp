@@ -9305,10 +9305,6 @@ void omx_vdec::handle_extradata(OMX_BUFFERHEADERTYPE *p_buf_hdr)
                                     ITU_R_601_FR : ITU_R_601;
                                 break;
                         }
-
-                        DEBUG_PRINT_LOW("colorspace from VUI = %d", color_space);
-                        setMetaData((private_handle_t *)native_buffer[buf_index].privatehandle,
-                               UPDATE_COLOR_SPACE, (void*)&color_space);
                     }
                     break;
                 default:

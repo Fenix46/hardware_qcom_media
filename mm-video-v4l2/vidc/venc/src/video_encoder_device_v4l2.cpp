@@ -2715,19 +2715,6 @@ bool venc_dev::venc_empty_buf(void *buffer, void *pmem_data_buf, unsigned index,
                     if (handle->base_metadata) {
                         MetaData_t *pMeta =
                                 reinterpret_cast<MetaData_t*>(handle->base_metadata);
-                        ColorSpace_t csc = pMeta->operation & UPDATE_COLOR_SPACE ?
-                                pMeta->colorSpace : (ColorSpace_t)-1;
-                        if (csc == ITU_R_709) {
-                            buf.flags |= V4L2_MSM_BUF_FLAG_YUV_601_709_CLAMP;
-                            DEBUG_PRINT_LOW("venc_empty_buf: force 601 -> 709 clamping");
-			    color_space = V4L2_COLORSPACE_REC709;
-                        } else if (csc == ITU_R_601_FR) {
-                            DEBUG_PRINT_LOW("venc_empty_buf: 601 full-range");
-                            color_space = V4L2_COLORSPACE_470_SYSTEM_BG;
-                        } else if (csc == ITU_R_601) {
-                            DEBUG_PRINT_LOW("venc_empty_buf: 601 clamped");
-                            color_space = V4L2_COLORSPACE_BT878;
-                        }
                     } else {
                         DEBUG_PRINT_LOW("venc_empty_buf: gralloc metadata is NULL");
                     }
